@@ -1,12 +1,11 @@
-package generates_test
+package generates
 
 import (
 	"testing"
 	"time"
 
-	"gopkg.in/oauth2.v3"
-	"gopkg.in/oauth2.v3/generates"
-	"gopkg.in/oauth2.v3/models"
+	"github.com/akuan/oauth2"
+	"github.com/akuan/oauth2/models"
 
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -21,7 +20,7 @@ func TestAuthorize(t *testing.T) {
 			UserID:   "000000",
 			CreateAt: time.Now(),
 		}
-		gen := generates.NewAuthorizeGenerate()
+		gen := NewAuthorizeGenerate()
 		code, err := gen.Token(data)
 		So(err, ShouldBeNil)
 		So(code, ShouldNotBeEmpty)

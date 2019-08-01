@@ -6,8 +6,9 @@ import (
 	"strconv"
 	"strings"
 
-	"gopkg.in/oauth2.v3"
-	"gopkg.in/oauth2.v3/utils/uuid"
+	"github.com/akuan/oauth2/utils/uuid"
+
+	"github.com/akuan/oauth2"
 )
 
 // NewAccessGenerate create to generate the access token instance

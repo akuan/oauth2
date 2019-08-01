@@ -3,10 +3,10 @@ package manage
 import (
 	"time"
 
-	"gopkg.in/oauth2.v3"
-	"gopkg.in/oauth2.v3/errors"
-	"gopkg.in/oauth2.v3/generates"
-	"gopkg.in/oauth2.v3/models"
+	"github.com/akuan/oauth2"
+	"github.com/akuan/oauth2/errors"
+	"github.com/akuan/oauth2/generates"
+	"github.com/akuan/oauth2/models"
 )
 
 // NewDefaultManager create to default authorization management instance

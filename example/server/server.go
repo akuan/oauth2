@@ -8,14 +8,19 @@ import (
 	"os"
 	"time"
 
+	"generates"
+
+	"manage"
+
+	"models"
+
+	"server"
+
+	"store"
+
+	"github.com/akuan/oauth2/errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-session/session"
-	"gopkg.in/oauth2.v3/errors"
-	"gopkg.in/oauth2.v3/generates"
-	"gopkg.in/oauth2.v3/manage"
-	"gopkg.in/oauth2.v3/models"
-	"gopkg.in/oauth2.v3/server"
-	"gopkg.in/oauth2.v3/store"
 )
 
 func main() {

@@ -7,10 +7,10 @@ import (
 
 	errs "errors"
 
+	"github.com/akuan/oauth2"
+	"github.com/akuan/oauth2/errors"
+	"github.com/akuan/oauth2/utils/uuid"
 	"github.com/dgrijalva/jwt-go"
-	"gopkg.in/oauth2.v3"
-	"gopkg.in/oauth2.v3/errors"
-	"gopkg.in/oauth2.v3/utils/uuid"
 )
 
 // JWTAccessClaims jwt claims
