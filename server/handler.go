@@ -1,6 +1,7 @@
 package server
 
 import (
+	"log"
 	"net/http"
 	"time"
 
@@ -55,6 +56,7 @@ func ClientFormHandler(r *http.Request) (clientID, clientSecret string, err erro
 
 // ClientBasicHandler get client data from basic authorization
 func ClientBasicHandler(r *http.Request) (clientID, clientSecret string, err error) {
+	log.Printf("ClientBasicHandler")
 	username, password, ok := r.BasicAuth()
 	if !ok {
 		err = errors.ErrInvalidClient

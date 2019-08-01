@@ -3,6 +3,7 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -84,7 +85,7 @@ func (s *Server) tokenError(w http.ResponseWriter, err error) (uerr error) {
 }
 
 func (s *Server) token(w http.ResponseWriter, data map[string]interface{}, header http.Header, statusCode ...int) (err error) {
-	s.Debug("\n token")
+	s.Debug("token method invoke")
 	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
 	w.Header().Set("Cache-Control", "no-store")
 	w.Header().Set("Pragma", "no-cache")
@@ -97,7 +98,7 @@ func (s *Server) token(w http.ResponseWriter, data map[string]interface{}, heade
 	if len(statusCode) > 0 && statusCode[0] > 0 {
 		status = statusCode[0]
 	}
-	s.Debug("\n WriteHeader(status) status=%d", status)
+	s.Debug("WriteHeader(status) status=%d", status)
 	w.WriteHeader(status)
 	err = json.NewEncoder(w).Encode(data)
 	return
@@ -298,7 +299,7 @@ func (s *Server) HandleAuthorizeRequest(w http.ResponseWriter, r *http.Request) 
 
 // ValidationTokenRequest the token request validation
 func (s *Server) ValidationTokenRequest(r *http.Request) (gt oauth2.GrantType, tgr *oauth2.TokenGenerateRequest, err error) {
-	s.Debug("\n ValidationTokenRequest")
+	s.Debug("ValidationTokenRequest")
 	if v := r.Method; !(v == "POST" ||
 		(s.Config.AllowGetAccessRequest && v == "GET")) {
 		err = errors.ErrInvalidRequest
@@ -306,7 +307,7 @@ func (s *Server) ValidationTokenRequest(r *http.Request) (gt oauth2.GrantType, t
 	}
 
 	gt = oauth2.GrantType(r.FormValue("grant_type"))
-	s.Debug("\n grant_type %s ", gt)
+	s.Debug("grant_type=%s ", gt)
 	if gt.String() == "" {
 		err = errors.ErrUnsupportedGrantType
 		return
@@ -377,7 +378,7 @@ func (s *Server) CheckGrantType(gt oauth2.GrantType) bool {
 
 // GetAccessToken access token
 func (s *Server) GetAccessToken(gt oauth2.GrantType, tgr *oauth2.TokenGenerateRequest) (ti oauth2.TokenInfo, err error) {
-	s.Debug("\n GetAccessToken")
+	s.Debug("GetAccessToken GrantType=%s", gt)
 	if allowed := s.CheckGrantType(gt); !allowed {
 		err = errors.ErrUnauthorizedClient
 		return
@@ -463,7 +464,7 @@ func (s *Server) GetAccessToken(gt oauth2.GrantType, tgr *oauth2.TokenGenerateRe
 
 // GetTokenData token data
 func (s *Server) GetTokenData(ti oauth2.TokenInfo) (data map[string]interface{}) {
-	s.Debug("\n GetTokenData")
+	s.Debug("GetTokenData")
 	data = map[string]interface{}{
 		"access_token": ti.GetAccess(),
 		"token_type":   s.Config.TokenType,
@@ -491,16 +492,16 @@ func (s *Server) GetTokenData(ti oauth2.TokenInfo) (data map[string]interface{})
 }
 func (s *Server) Debug(f string, v ...interface{}) {
 	if s.Config.Debug {
-		fmt.Printf(f, v...)
+		log.Printf(f, v...)
 	}
 }
 
 // HandleTokenRequest token request handling
 func (s *Server) HandleTokenRequest(w http.ResponseWriter, r *http.Request) (err error) {
-	s.Debug("\nHandleTokenRequest")
+	s.Debug("HandleTokenRequest")
 	gt, tgr, verr := s.ValidationTokenRequest(r)
 	if verr != nil {
-		s.Debug("\n ValidationTokenRequest Error %s ", verr.Error())
+		s.Debug("ValidationTokenRequest Error %s ", verr.Error())
 		err = s.tokenError(w, verr)
 		return
 	}

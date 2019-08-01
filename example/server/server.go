@@ -8,16 +8,11 @@ import (
 	"os"
 	"time"
 
-	"generates"
-
-	"manage"
-
-	"models"
-
-	"server"
-
-	"store"
-
+	"github.com/akuan/oauth2/generates"
+	"github.com/akuan/oauth2/manage"
+	"github.com/akuan/oauth2/models"
+	"github.com/akuan/oauth2/server"
+	"github.com/akuan/oauth2/store"
 	"github.com/akuan/oauth2/errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/go-session/session"
