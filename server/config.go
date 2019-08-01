@@ -10,6 +10,7 @@ import (
 // Config configuration parameters
 type Config struct {
 	TokenType             string                // token type
+	Debug                 bool                  //
 	AllowGetAccessRequest bool                  // to allow GET requests for the token
 	AllowedResponseTypes  []oauth2.ResponseType // allow the authorization type
 	AllowedGrantTypes     []oauth2.GrantType    // allow the grant type
@@ -19,6 +20,7 @@ type Config struct {
 func NewConfig() *Config {
 	return &Config{
 		TokenType:            "Bearer",
+		Debug:                true,
 		AllowedResponseTypes: []oauth2.ResponseType{oauth2.Code, oauth2.Token},
 		AllowedGrantTypes: []oauth2.GrantType{
 			oauth2.AuthorizationCode,
